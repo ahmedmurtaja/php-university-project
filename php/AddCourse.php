@@ -86,7 +86,7 @@ include_once('../includes/DBconnection.php');
                         $startdate = ($_POST['sDate']);
                     }
 
-                    if (empty($_POST['endDate'])) {
+                    if (empty($_POST['eDate'])) {
                         $eDateErr = "End date of the course is required";
                     } else {
                         $enddate = ($_POST['eDate']);
@@ -96,16 +96,14 @@ include_once('../includes/DBconnection.php');
                         $insErr = "Institution name is required";
                     } else {
                         $ins = ($_POST['ins']);
-                        if (!preg_match("/^[a-zA-Z-' ]*$/", $ins)) {
-                            $insErr = "Only letters and white space allowed";
-                        }
+                        
                     }
 
                     $note = $_POST['note'];
 
 
                     if ($attach === "url") {
-                        $url = $_POST['attach'];
+                        $url = $_POST['url'];
                         if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $url)) {
                             $urlErr = "Invalid URL";
                         }
@@ -184,7 +182,7 @@ include_once('../includes/DBconnection.php');
                                 <label for="eDate">End Date:</label>
                             </td>
                             <td>
-                                <input name="endDate" type="date" id="eDate" class="form-inputs">
+                                <input name="eDate" type="date" id="eDate" class="form-inputs">
                             </td>
                         </tr>
                         <tr>
