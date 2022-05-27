@@ -1,0 +1,53 @@
+.courses-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table{
+    border-radius: 15px;
+    
+}
+
+table,th,tr,td{
+    border: solid 1px #000 !important;
+    
+}
+td,th{
+    border: none;
+}
+th,td{
+    text-align: center;
+}
+.horo{
+    width: 35px;
+    height: 35px;
+}
+tr.c th{
+    background-color: #606060;
+}
+table td a{
+    color: #00baff;
+} 
+table tr:not(:first-child) td:last-child{
+    text-align: justify;
+}
+#b1{
+    border-top-left-radius: 8px;
+}
+#b2{
+    border-top-right-radius: 8px;
+}
+#b3{
+    border-bottom-left-radius: 8px;
+}
+#b4{
+    border-bottom-right-radius: 8px ;
+}
+h1{
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+tr:nth-child(odd){
+    background-color: #E5E5E5;
+}
