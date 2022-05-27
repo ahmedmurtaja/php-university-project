@@ -47,37 +47,111 @@ include_once('../includes/DBconnection.php');
                 <?php
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $name = $_POST['course_name'];
-                    $hours = $_POST['Hours'];
-                    $startdate = $_POST['sDate'];
-                    $enddate = $_POST['endDate'];
-                    $ins = $_POST['ins'];
+                //     $name = $_POST['course_name'];
+                //     $hours = $_POST['Hours'];
+                //     $startdate = $_POST['sDate'];
+                //     $enddate = $_POST['endDate'];
+                //     $ins = $_POST['ins'];
                     $attach = $_POST['attach'];
-                    $note = $_POST['note'];
-                    if ($attach === "yes") {
+                //     $note = $_POST['note'];
+                //     if ($attach === "yes") {
 
                         $url = $_POST['url'];
                     }
 
+                $nameErr = $hoursErr = $sDateErr = $eDateErr = $insErr = $attErr = $urlErr = "";
+
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (empty($_POST['course_name'])) {
+                        $nameErr = "Course name is required";
+                    } else {
+                        $name = ($_POST['course_name']);
+                        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+                            $nameErr = "Only letters and white space allowed";
+                        }
+                    }
+
+                    if (empty($_POST['Hours'])) {
+                        $hoursErr = "Total course hours is required";
+                    } else {
+                        $hours = ($_POST['Hours']);
+                        if (!is_numeric($hours)) {
+                            $hoursErr = "Only numeric values allowed";
+                        }
+                    }
+
+                    if (empty($_POST['sDate'])) {
+                        $sDateErr = "Start date of the course is required";
+                    } else {
+                        $startdate = ($_POST['sDate']);
+                    }
+
+                    if (empty($_POST['endDate'])) {
+                        $eDateErr = "End date of the course is required";
+                    } else {
+                        $enddate = ($_POST['eDate']);
+                    }
+
+                    if (empty($_POST['ins'])) {
+                        $insErr = "Institution name is required";
+                    } else {
+                        $ins = ($_POST['ins']);
+                        if (!preg_match("/^[a-zA-Z-' ]*$/", $ins)) {
+                            $insErr = "Only letters and white space allowed";
+                        }
+                    }
+
+                    $note = $_POST['note'];
 
 
-                    // validation
+                    if ($attach === "url") {
+                        $url = $_POST['attach'];
+                        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $url)) {
+                            $urlErr = "Invalid URL";
+                        }
+                    }
 
-                    $query = "INSERT INTO `course` (`id`, `name`, `hours`, `datefrom`, `dateto`, `ins`, `note`, `url`) VALUES (NULL, '$name', '$hours', '$startdate', '$enddate', '$ins', '$note', '$url') ";
 
-                    $result = mysqli_query($connection, $query);
-                    if ($result) {
+
+                    if ($nameErr == "" && $hoursErr == "" && $sDateErr == "" && $eDateErr == "" && $insErr == "" && $attErr == "" && $urlErr == "") {
+                        $query = "INSERT INTO `course` (`id`, `name`, `hours`, `datefrom`, `dateto`, `ins`, `note`, `url`) VALUES (NULL, '$name', '$hours', '$startdate', '$enddate', '$ins', '$note', '$url') ";
+                        $result = mysqli_query($connection, $query);
+                        if ($result) {
+                            echo
+                            '<div id="myModal" class="modal">' .
+                                '<div class="modal-content">'
+                                . '<span class="close">' . '&times;' . '</span>'
+                                . '<p>' . 'New Record Added' . '</p>'
+                                . '</div>' . '</div>';
+                        } else {
+                            echo
+                            '<div id="myModal" class="modal">' .
+                            '<div class="modal-content">'
+                                . '<span class="close">' . '&times;' . '</span>'
+                                . '<p>' . $nameErr . '</p>'
+                                . '<p>' . $hoursErr . '</p>'
+                                . '<p>' . $sDateErr . '</p>'
+                                . '<p>' . $eDateErr . '</p>'
+                                . '<p>' . $insErr . '</p>'
+                                . '<p>' . $urlErr . '</p>'
+                                . '<p>' . $attErr . '</p>'
+                                . '</div>' . '</div>' . mysqli_error($conn);;
+                        }
+                    } else {
                         echo
                         '<div id="myModal" class="modal">' .
-                            '<div class="modal-content">'
-                            . '<span class="close">' . '&times;' . '</span>'
-                            . '<p>' . 'New Record Added' . '</p>'
-                            . '</div>' . '</div>';
-                    } else {
-                        echo '<div class="row"><div class="col-12"><div class="alert alert-danger">Failed to create a new record</div></div></div>' . '<br>' . mysqli_error($conn);;
+                        '<div class="modal-content">'
+                        . '<span class="close">' . '&times;' . '</span>'
+                            . '<p>' . $nameErr . '</p>'
+                            . '<p>' . $hoursErr . '</p>'
+                            . '<p>' . $sDateErr . '</p>'
+                            . '<p>' . $eDateErr . '</p>'
+                            . '<p>' . $insErr . '</p>'
+                            . '<p>' . $urlErr . '</p>'
+                            . '<p>' . $attErr . '</p>'
+                            . '</div>' . '</div>' ;
                     }
                 }
-
                 ?>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <table cellspacing="30">
@@ -127,7 +201,7 @@ include_once('../includes/DBconnection.php');
                             </td>
                             <td>
                                 <input type="radio" name="attach">File
-                                <input type="radio" name="attach" class="urlRadio" value="yes">URL
+                                <input type="radio" name="attach" class="urlRadio" value="url" checked>URL
                             </td>
                         </tr>
                         <tr>
