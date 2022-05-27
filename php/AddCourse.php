@@ -1,46 +1,92 @@
+<?php
+
+include_once('../includes/DBconnection.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add course</title>
     <link rel="stylesheet" href="../css/MyStyle.css">
+    <link rel="stylesheet" href="../css/style.css">
+
 </head>
+
 <body>
-    <div id="left"></div>
+    <!-- <div id="left"></div>
     <div id="right"></div>
     <div id="top"></div>
-    <div id="bottom"></div>
+    <div id="bottom"></div> -->
     <header>
         <nav>
-             <div class="container">
-                 <div class="contain">
-                   <ul class="nav-links">
-                       <li><a href="Home.html" >Personal Information</a></li>
-                       <li><a href="ViewCourses.html">Courses Information</a></li>
-                       <li><a href="ViewExperience.html">Experience Information</a></li>
-                       <li><a href="#" class="active">Add Course</a></li>
-                       <li><a href="AddExperience.html">Add Experience</a></li>
-                   </ul>
-                   <div class="logo">
-                       <img src="../images/Azhar_WHITE_LOGO.png" alt="Logo" width="80" height="80">
-                   </div> 
-                 </div>
-             </div>
-       </nav>
-   </header>
-   <main>
-       <div class="container">
-           <div class="AddCourses">
-               <form action="">
+            <div class="container">
+                <div class="contain">
+                    <ul class="nav-links">
+                        <li><a href="Home.php">Personal Information</a></li>
+                        <li><a href="ViewCourses.php">Courses Information</a></li>
+                        <li><a href="ViewExperience.php">Experience Information</a></li>
+                        <li><a href="#" class="active">Add Course</a></li>
+                        <li><a href="AddExperience.php">Add Experience</a></li>
+                    </ul>
+                    <div class="logo">
+                        <img src="../images/Azhar_WHITE_LOGO.png" alt="Logo" width="80" height="80">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <div class="container">
+            <div class="AddCourses">
+                <?php
+
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $name = $_POST['course_name'];
+                    $hours = $_POST['Hours'];
+                    $startdate = $_POST['sDate'];
+                    $enddate = $_POST['endDate'];
+                    $ins = $_POST['ins'];
+                    $attach = $_POST['attach'];
+                    $note = $_POST['note'];
+                    if ($attach === "yes") {
+
+                        $url = $_POST['url'];
+                    }
+
+
+
+                    // validation
+
+                    $query = "INSERT INTO `course` (`id`, `name`, `hours`, `datefrom`, `dateto`, `ins`, `note`, `url`) VALUES (NULL, '$name', '$hours', '$startdate', '$enddate', '$ins', '$note', '$url') ";
+
+                    $result = mysqli_query($connection, $query);
+                    if ($result) {
+                        echo
+                        '<div id="myModal" class="modal">' .
+                            '<div class="modal-content">'
+                            . '<span class="close">' . '&times;' . '</span>'
+                            . '<p>' . 'New Record Added' . '</p>'
+                            . '</div>' . '</div>';
+                    } else {
+                        echo '<div class="row"><div class="col-12"><div class="alert alert-danger">Failed to create a new record</div></div></div>' . '<br>' . mysqli_error($conn);;
+                    }
+                }
+
+                ?>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <table cellspacing="30">
                         <tr>
                             <td>
                                 <label for="cName">Course Name:</label>
                             </td>
                             <td>
-                                <input type="text" id="cName" class="form-inputs">
+                                <input type="text" id="cName" class="form-inputs" name="course_name">
                             </td>
                         </tr>
                         <tr>
@@ -48,23 +94,23 @@
                                 <label for="noHours">Number of Hours:</label>
                             </td>
                             <td>
-                                <input type="number" id="noHours" class="form-inputs">
+                                <input type="number" id="noHours" class="form-inputs" name="Hours">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                     <label for="sDate">State Date:</label>
+                                <label for="sDate">Start Date:</label>
                             </td>
                             <td>
-                                       <input type="date" id="sDate" class="form-inputs">
+                                <input type="date" id="sDate" class="form-inputs" name="sDate">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                     <label for="eDate">End Date:</label>
+                                <label for="eDate">End Date:</label>
                             </td>
                             <td>
-                                       <input type="date" id="eDate" class="form-inputs">
+                                <input name="endDate" type="date" id="eDate" class="form-inputs">
                             </td>
                         </tr>
                         <tr>
@@ -72,7 +118,7 @@
                                 <label for="ins">Institution:</label>
                             </td>
                             <td>
-                                <input type="text" id="ins" class="form-inputs">
+                                <input type="text" name="ins" id="ins" class="form-inputs">
                             </td>
                         </tr>
                         <tr>
@@ -81,21 +127,21 @@
                             </td>
                             <td>
                                 <input type="radio" name="attach">File
-                                <input type="radio" name="attach" class="urlRadio">URL
+                                <input type="radio" name="attach" class="urlRadio" value="yes">URL
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                  <label for="url">URL:</label>
+                                <label for="url">URL:</label>
                             </td>
                             <td>
-                                <input type="url" id="url" class="form-inputs">
+                                <input type="url" name="url" id="url" class="form-inputs">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="file">File:</label>
-                            </td> 
+                            </td>
                             <td>
                                 <input type="file" id="file">
                             </td>
@@ -105,19 +151,37 @@
                                 <label for="note">Note:</label>
                             </td>
                             <td>
-                               <textarea name="" id="note"  class="form-inputs"></textarea>
+                                <textarea name="note" id="note" class="form-inputs"></textarea>
                             </td>
                         </tr>
                     </table>
                     <input type="submit" value="Save">
-                    <input type="reset" value="Reset">                         
-               </form>
-               <div class="image course">
-                   <img src="../images/course.jpg" alt="Course">
-               </div>
-           </div>
-       </div>
-   </main>
-    
+                    <input type="reset" value="Reset">
+                </form>
+                <div class="image course">
+                    <img src="../images/course.jpg" alt="Course">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
+
 </html>

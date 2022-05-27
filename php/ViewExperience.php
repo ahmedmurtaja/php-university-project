@@ -17,11 +17,11 @@
              <div class="container">
                  <div class="contain">
                    <ul class="nav-links">
-                       <li><a href="Home.html" >Personal Information</a></li>
-                       <li><a href="ViewCourses.html">Courses Information</a></li>
+                       <li><a href="Home.php" >Personal Information</a></li>
+                       <li><a href="ViewCourses.php">Courses Information</a></li>
                        <li><a href="#" class="active">Experience Information</a></li> 
-                       <li><a href="AddCourse.html">Add Course</a></li>
-                       <li><a href="AddExperience.html">Add Experience</a></li> 
+                       <li><a href="AddCourse.php">Add Course</a></li>
+                       <li><a href="AddExperience.php">Add Experience</a></li> 
                    </ul>
                    <div class="logo">
                        <img src="../images/Azhar_WHITE_LOGO.png" alt="Logo" width="80" height="80">

@@ -21,11 +21,11 @@
              <div class="container">
                  <div class="contain">
                    <ul class="nav-links">
-                       <li><a href="Home.html" >Personal Information</a></li>
+                       <li><a href="Home.php" >Personal Information</a></li>
                        <li><a href="#" class="active">Courses Information</a></li>
-                       <li><a href="ViewExperience.html">Experience Information</a></li>
-                       <li><a href="AddCourse.html">Add Course</a></li>
-                       <li><a href="AddExperience.html">Add Experience</a></li>
+                       <li><a href="ViewExperience.php">Experience Information</a></li>
+                       <li><a href="AddCourse.php">Add Course</a></li>
+                       <li><a href="AddExperience.php">Add Experience</a></li>
                    </ul>
                    <div class="logo">
                        <img src="../images/Azhar_WHITE_LOGO.png" alt="Logo" width="80" height="80">
@@ -59,7 +59,7 @@
             <td>1/9/2021</td>
             <td>23/12/2021</td>
             <td colspan="2">Al-Azhar University</td>
-            <td colspan="2"><a href="Course_1View.html" target="_blank">View</a></td>
+            <td colspan="2"><a href="Course_1View.php" target="_blank">View</a></td>
             <td >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, necessitatibus!</td>
         </tr>
         <tr height="80px">
@@ -69,7 +69,7 @@
             <td>20/1/2021</td>
             <td>15/4/2021</td>
             <td colspan="2">Vision Plus</td>
-            <td colspan="2"><a href="Course_2View.html" target="_blank">View</a></td>
+            <td colspan="2"><a href="Course_2View.php" target="_blank">View</a></td>
             <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, iusto!</td>
         </tr>
         <tr height="80px" >
@@ -79,7 +79,7 @@
             <td>10/6/2021</td>
             <td>15/7/2021</td>
             <td colspan="2">Coursera</td>
-            <td colspan="2"><a href="Course_3View.html" target="_blank">View</a></td>
+            <td colspan="2"><a href="Course_3View.php" target="_blank">View</a></td>
             <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, esse.</td>
         </tr>
         <tr height="80px">
@@ -89,7 +89,7 @@
             <td>1/8/2021</td>
             <td>15/9/2021</td>
             <td colspan="2">Udemy</td>
-            <td colspan="2"><a href="Course4View.html" target="_blank">View</a></td>
+            <td colspan="2"><a href="Course4View.php" target="_blank">View</a></td>
             <td id="b4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe, vel.</td>
         </tr>
     </table>
