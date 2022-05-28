@@ -15,10 +15,6 @@ include_once('../includes/DBconnection.php');
 </head>
 
 <body>
-    <!-- <div id="left"></div>
-    <div id="right"></div>
-    <div id="top"></div>
-    <div id="bottom"></div> -->
     <header>
         <nav>
             <div class="container">
@@ -86,7 +82,7 @@ include_once('../includes/DBconnection.php');
                     } else {
                         $enddate = ($_POST['endDate']);
                     }
-                }
+                
 
 
 
@@ -130,7 +126,7 @@ include_once('../includes/DBconnection.php');
                         . '<p>' . $attErr . '</p>'
                         . '</div>' . '</div>';
                 }
-
+            }
 
                 ?>
 
