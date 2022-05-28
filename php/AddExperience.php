@@ -40,14 +40,35 @@ include_once('../includes/DBconnection.php');
         <div class="container">
             <div class="AddExp">
                 <?php
+                // erros statments
+                $nameErr = $titleErr = $sDateErr = $eDateErr = $insErr = $attErr = $urlErr = "";
 
-                $nameErr = $hoursErr = $sDateErr = $eDateErr = $insErr = $attErr = $urlErr = "";
+
+
+
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // experience name check
                     if (empty($_POST['ename'])) {
                         $nameErr = "Experience name is required";
                     } else {
                         $category = ($_POST['ename']);
+                    }
+
+                    // ins name check
+                    if (empty($_POST['title'])) {
+                        $titleErr = "title is required";
+                    } else {
+                        $title = $_POST['title'];
+                    }
+
+                    $note = $_POST['note'];
+
+                    // ins check 
+                    if (empty($_POST['ins'])) {
+                        $insErr = "Institution name is required";
+                    } else {
+                        $ins = ($_POST['ins']);
                     }
 
 
@@ -65,29 +86,18 @@ include_once('../includes/DBconnection.php');
                         $enddate = ($_POST['endDate']);
                     }
 
-                    if (empty($_POST['ins'])) {
-                        $insErr = "Institution name is required";
-                    } else {
-                        $ins = ($_POST['ins']);
-                    }
 
-                    if (empty($_POST['tilte'])) {
-                        $insErr = "Institution name is required";
-                    } else {
-                        $title = $_POST['title'];
-                    }
 
-                    $note = $_POST['note'];
+
+                }
 
 
 
 
-
-
-                    if ($nameErr == "" && $hoursErr == "" && $sDateErr == "" && $eDateErr == "" && $insErr == "" && $attErr == "" && $urlErr == "") {
-                        $sql = "INSERT INTO Experience (category, title, startdate, enddate, institution, description)
-                               VALUES ('$category', '$title', '$startdate', '$enddate', '$ins', '$note')";
-                        $result = mysqli_query($connection, $query);
+                    if ($nameErr == "" && $titleErr == "" && $sDateErr == "" && $eDateErr == ""  && $attErr == "" && $urlErr == "") {
+                        $sql = "INSERT INTO Experience (id,category, title, startdate, enddate, institution, description)
+                               VALUES (NULL,'$category', '$title', '$startdate', '$enddate', '$ins', '$note')";
+                        $result = mysqli_query($connection, $sql);
                         if ($result) {
                             echo
                             '<div id="myModal" class="modal">' .
@@ -101,13 +111,13 @@ include_once('../includes/DBconnection.php');
                                 '<div class="modal-content">'
                                 . '<span class="close">' . '&times;' . '</span>'
                                 . '<p>' . $nameErr . '</p>'
-                                . '<p>' . $hoursErr . '</p>'
+                                . '<p>' . $titleErr . '</p>'
                                 . '<p>' . $sDateErr . '</p>'
                                 . '<p>' . $eDateErr . '</p>'
                                 . '<p>' . $insErr . '</p>'
                                 . '<p>' . $urlErr . '</p>'
                                 . '<p>' . $attErr . '</p>'
-                                . '</div>' . '</div>' . mysqli_error($conn);;
+                                . '</div>' . '</div>' . mysqli_error($connection);;
                         }
                     } else {
                         echo
@@ -115,7 +125,7 @@ include_once('../includes/DBconnection.php');
                             '<div class="modal-content">'
                             . '<span class="close">' . '&times;' . '</span>'
                             . '<p>' . $nameErr . '</p>'
-                            . '<p>' . $hoursErr . '</p>'
+                            . '<p>' . $titleErr . '</p>'
                             . '<p>' . $sDateErr . '</p>'
                             . '<p>' . $eDateErr . '</p>'
                             . '<p>' . $insErr . '</p>'
@@ -123,8 +133,10 @@ include_once('../includes/DBconnection.php');
                             . '<p>' . $attErr . '</p>'
                             . '</div>' . '</div>';
                     }
-                }
+                
+
                 ?>
+
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <table cellspacing="30">
                         <tr>
@@ -137,10 +149,10 @@ include_once('../includes/DBconnection.php');
                         </tr>
                         <tr>
                             <td>
-                                <label for="noHours">title</label>
+                                <label for="title">title</label>
                             </td>
                             <td>
-                                <input type="text" id="noHours" name="title" class="form-inputs">
+                                <input type="text" id="title" name="title" class="form-inputs">
                             </td>
                         </tr>
                         <tr>
@@ -179,6 +191,7 @@ include_once('../includes/DBconnection.php');
                     </table>
                     <input type="submit" value="Save">
                     <input type="reset" value="Reset">
+
                 </form>
                 <div class="image exp">
                     <img src="../images/experience.jpg" alt="Course">

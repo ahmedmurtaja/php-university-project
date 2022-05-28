@@ -133,7 +133,7 @@ include_once('../includes/DBconnection.php');
                                 . '<p>' . $insErr . '</p>'
                                 . '<p>' . $urlErr . '</p>'
                                 . '<p>' . $attErr . '</p>'
-                                . '</div>' . '</div>' . mysqli_error($conn);;
+                                . '</div>' . '</div>' . mysqli_error($connection);;
                         }
                     } else {
                         echo
