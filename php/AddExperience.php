@@ -88,7 +88,7 @@ include_once('../includes/DBconnection.php');
 
 
                 if ($nameErr == "" && $titleErr == "" && $sDateErr == "" && $eDateErr == ""  && $attErr == "" && $urlErr == "") {
-                    $sql = "INSERT INTO Experience (id,category, title, startdate, enddate, institution, description)
+                    $sql = "INSERT INTO `experience` (id,category, title, startdate, enddate, institution, description)
                                VALUES (NULL,'$category', '$title', '$startdate', '$enddate', '$ins', '$note')";
                     $result = mysqli_query($connection, $sql);
                     if ($result) {

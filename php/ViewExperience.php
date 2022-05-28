@@ -37,7 +37,7 @@ include_once('../includes/DBconnection.php');
                 <h1>All Experience Information</h1>
                 <?php
                 // fetch data from database
-                $sql = "SELECT * FROM `Experience`";
+                $sql = "SELECT * FROM `experience` ";
                 $result = mysqli_query($connection, $sql);
 
                 if (mysqli_num_rows($result) > 0) {
