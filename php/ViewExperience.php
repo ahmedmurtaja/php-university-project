@@ -1,3 +1,6 @@
+<?php
+include_once('../includes/DBconnection.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +13,6 @@
 </head>
 
 <body>
-    <div id="left"></div>
-    <div id="right"></div>
-    <div id="top"></div>
-    <div id="bottom"></div>
     <header>
         <nav>
             <div class="container">
@@ -36,6 +35,24 @@
         <div class="container">
             <div class="viewExp">
                 <h1>All Experience Information</h1>
+                <?php
+                // fetch data from database
+                $sql = "SELECT * FROM `Experience`";
+                $result = mysqli_query($connection, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<section class="first">' . '<h3>'. $row['title'] .
+                        '<sub>'. $row['institution'].'/'. $row['category'].'</sub>'.'</h3>'.
+                        '<h4>'.'from' .$row['startdate'].'to'. $row['enddate'].'</h4>'.
+                        '<p>'. $row['description'].'</p>'. '</section>';
+                        
+                    }
+                }
+                 else {
+                    echo "0 results";
+                }
+                ?>
                 <section class="first">
                     <h3>IOS <sub>Google/trainning</sub></h3>
                     <h4>from 5/2016 to 5/2020</h4>
