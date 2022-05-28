@@ -48,12 +48,13 @@ include_once('../includes/DBconnection.php');
 
             <tr class="c">
                 <th rowspan="2" colspan="1" class="horo" id="b1">#</th>
-                <th calss="horo"  rowspan="2" colspan="2" width="200px">Course Name</th>
+                <th calss="horo" rowspan="2" colspan="2" width="200px">Course Name</th>
                 <th calss="horo" rowspan="2" colspan="2" width="100px">Total Hours</th>
                 <th calss="horo" colspan="2" width="200px">Date</th>
                 <th calss="horo" rowspan="2" colspan="2" width="170">Institution</th>
                 <th calss="horo" rowspan="2" colspan="2" width="100px">Attachment</th>
                 <th calss="horo" rowspan="2" colspan="2" width="200px" id="b2">Notes</th>
+                <th calss="horo" rowspan="2" colspan="2" width="120px" id="b2">image</th>
             </tr>
             <tr class="c">
 
@@ -62,13 +63,13 @@ include_once('../includes/DBconnection.php');
             </tr>
             <?php
             // mysql fetch data
-      
+
             // pdo connection
             $pdo = new PDO('mysql:host=localhost;dbname=webproject', 'root', '');
 
             $courses = $pdo->query("SELECT * FROM course");
             $i = 1;
-           
+
             while ($row = $courses->fetch(PDO::FETCH_ASSOC)) {
             ?>
                 <tr class="c">
@@ -80,6 +81,9 @@ include_once('../includes/DBconnection.php');
                     <td class="horo" colspan="2"><?php echo $row['ins']; ?></td>
                     <td class="horo" colspan="2"> <?php echo $row['url']; ?> </td>
                     <td class="horo"><?php echo $row['note']; ?></td>
+                    <td class="horo"><img src="../images/<?php echo $row['image']; ?>" alt="image" width="100" height="100"></td>
+                    <?php $urls = 'http://localhost:8080/php-university-project/php/' . $row['image']; ?>
+
                 </tr>
             <?php
                 $i++;
@@ -90,7 +94,7 @@ include_once('../includes/DBconnection.php');
 
 
 
-            
+
         </table>
     </div>
 

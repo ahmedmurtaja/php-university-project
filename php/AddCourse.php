@@ -45,23 +45,37 @@ include_once('../includes/DBconnection.php');
         <div class="container">
             <div class="AddCourses">
                 <?php
+                // upload image
 
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                //     $name = $_POST['course_name'];
-                //     $hours = $_POST['Hours'];
-                //     $startdate = $_POST['sDate'];
-                //     $enddate = $_POST['endDate'];
-                //     $ins = $_POST['ins'];
-                    $attach = $_POST['attach'];
-                //     $note = $_POST['note'];
-                //     if ($attach === "yes") {
 
-                        $url = $_POST['url'];
-                    }
+
+                // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                //     // $file_name = $_FILES['personal_image']['name'];        # img4784-5745sfs.png
+                //     // $file_size = $_FILES['personal_image']['size'];
+                //     // $file_tmp = $_FILES['personal_image']['tmp_name'];
+                //     // $file_type = $_FILES['personal_image']['type'];
+                //     // $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+                //     // $file_new_name = strval(time() + rand(1, 10000000)) . ".$file_ext";
+                //     // $upload_path = '../images/' . $file_new_name;
+                //     // move_uploaded_file($file_tmp, $upload_path);
+                // }
 
                 $nameErr = $hoursErr = $sDateErr = $eDateErr = $insErr = $attErr = $urlErr = "";
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $attach = $_POST['attach'];
+                    $url = $_POST['url'];
+                    $image = $_FILES['personal_image']['name'];
+                    $image_tmp = $_FILES['personal_image']['tmp_name'];
+                    $file_ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+                    $file_new_name = strval(time() + rand(1, 10000000)) . ".$file_ext";
+                    $upload_path = '../images/' . $file_new_name;
+                    move_uploaded_file($image_tmp, $upload_path);
+                    
+                    $image_path = str_replace('../','',$upload_path);
+
                     if (empty($_POST['course_name'])) {
                         $nameErr = "Course name is required";
                     } else {
@@ -96,7 +110,6 @@ include_once('../includes/DBconnection.php');
                         $insErr = "Institution name is required";
                     } else {
                         $ins = ($_POST['ins']);
-                        
                     }
 
                     $note = $_POST['note'];
@@ -112,7 +125,7 @@ include_once('../includes/DBconnection.php');
 
 
                     if ($nameErr == "" && $hoursErr == "" && $sDateErr == "" && $eDateErr == "" && $insErr == "" && $attErr == "" && $urlErr == "") {
-                        $query = "INSERT INTO `course` (`id`, `name`, `hours`, `datefrom`, `dateto`, `ins`, `note`, `url`) VALUES (NULL, '$name', '$hours', '$startdate', '$enddate', '$ins', '$note', '$url') ";
+                        $query = "INSERT INTO `course` (`id`, `name`, `hours`, `datefrom`, `dateto`, `ins`, `note`, `url`,`image`) VALUES (NULL, '$name', '$hours', '$startdate', '$enddate', '$ins', '$note', '$url','$image_path') ";
                         $result = mysqli_query($connection, $query);
                         if ($result) {
                             echo
@@ -124,7 +137,7 @@ include_once('../includes/DBconnection.php');
                         } else {
                             echo
                             '<div id="myModal" class="modal">' .
-                            '<div class="modal-content">'
+                                '<div class="modal-content">'
                                 . '<span class="close">' . '&times;' . '</span>'
                                 . '<p>' . $nameErr . '</p>'
                                 . '<p>' . $hoursErr . '</p>'
@@ -138,8 +151,8 @@ include_once('../includes/DBconnection.php');
                     } else {
                         echo
                         '<div id="myModal" class="modal">' .
-                        '<div class="modal-content">'
-                        . '<span class="close">' . '&times;' . '</span>'
+                            '<div class="modal-content">'
+                            . '<span class="close">' . '&times;' . '</span>'
                             . '<p>' . $nameErr . '</p>'
                             . '<p>' . $hoursErr . '</p>'
                             . '<p>' . $sDateErr . '</p>'
@@ -147,11 +160,11 @@ include_once('../includes/DBconnection.php');
                             . '<p>' . $insErr . '</p>'
                             . '<p>' . $urlErr . '</p>'
                             . '<p>' . $attErr . '</p>'
-                            . '</div>' . '</div>' ;
+                            . '</div>' . '</div>';
                     }
                 }
                 ?>
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
                     <table cellspacing="30">
                         <tr>
                             <td>
@@ -215,7 +228,7 @@ include_once('../includes/DBconnection.php');
                                 <label for="file">File:</label>
                             </td>
                             <td>
-                                <input type="file" id="file">
+                                <input type="file" id="file" name="personal_image">
                             </td>
                         </tr>
                         <tr>
