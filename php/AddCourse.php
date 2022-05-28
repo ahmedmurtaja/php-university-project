@@ -67,14 +67,16 @@ include_once('../includes/DBconnection.php');
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $attach = $_POST['attach'];
                     $url = $_POST['url'];
-                    $image = $_FILES['personal_image']['name'];
+                    $image = $_FILES['personal_image'];
+
+                    $file_name = $_FILES['personal_image']['name'];
                     $image_tmp = $_FILES['personal_image']['tmp_name'];
-                    $file_ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+                    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
                     $file_new_name = strval(time() + rand(1, 10000000)) . ".$file_ext";
                     $upload_path = '../images/' . $file_new_name;
                     move_uploaded_file($image_tmp, $upload_path);
-                    
-                    $image_path = str_replace('../','',$upload_path);
+
+                    $image_path = str_replace('../', '', $upload_path);
 
                     if (empty($_POST['course_name'])) {
                         $nameErr = "Course name is required";

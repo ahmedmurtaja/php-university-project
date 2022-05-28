@@ -1,5 +1,11 @@
 <?php
 include_once '../includes/DBconnection.php';
+
+if(isset($_GET['id']))
+{
+    $id=$_GET['id'];
+    // $query=
+}
 ?>
 
 <!DOCTYPE html>

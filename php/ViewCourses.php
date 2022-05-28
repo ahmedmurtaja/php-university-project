@@ -55,6 +55,7 @@ include_once('../includes/DBconnection.php');
                 <th calss="horo" rowspan="2" colspan="2" width="100px">Attachment</th>
                 <th calss="horo" rowspan="2" colspan="2" width="200px" id="b2">Notes</th>
                 <th calss="horo" rowspan="2" colspan="2" width="120px" id="b2">image</th>
+                <th calss="horo" rowspan="2" colspan="2" width="120px" id="b2">view</th>
             </tr>
             <tr class="c">
 
@@ -81,8 +82,9 @@ include_once('../includes/DBconnection.php');
                     <td class="horo" colspan="2"><?php echo $row['ins']; ?></td>
                     <td class="horo" colspan="2"> <?php echo $row['url']; ?> </td>
                     <td class="horo"><?php echo $row['note']; ?></td>
-                    <td class="horo"><img src="../images/<?php echo $row['image']; ?>" alt="image" width="100" height="100"></td>
-                    <?php $urls = 'http://localhost:8080/php-university-project/php/' . $row['image']; ?>
+                    <?php $urls = 'http://localhost:8080/php-university-project/' . $row['image']; ?>
+                    <td class="horo" colspan="2"><img src="<?php echo 'http://localhost:8080/php-university-project/' . $row['image']; ?>" alt="image" width="50" height="50"></td>
+                    <td class="horo" colspan="2"><a href="<?php echo 'Course_1View.php?id='.$row['id'];?>"> view </a> </td>
 
                 </tr>
             <?php
