@@ -11,6 +11,7 @@ include_once('../includes/DBconnection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Experience</title>
     <link rel="stylesheet" href="../css/MyStyle.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -85,40 +86,22 @@ include_once('../includes/DBconnection.php');
                     } else {
                         $enddate = ($_POST['endDate']);
                     }
-
-
-
-
                 }
 
 
 
 
-                    if ($nameErr == "" && $titleErr == "" && $sDateErr == "" && $eDateErr == ""  && $attErr == "" && $urlErr == "") {
-                        $sql = "INSERT INTO Experience (id,category, title, startdate, enddate, institution, description)
+                if ($nameErr == "" && $titleErr == "" && $sDateErr == "" && $eDateErr == ""  && $attErr == "" && $urlErr == "") {
+                    $sql = "INSERT INTO Experience (id,category, title, startdate, enddate, institution, description)
                                VALUES (NULL,'$category', '$title', '$startdate', '$enddate', '$ins', '$note')";
-                        $result = mysqli_query($connection, $sql);
-                        if ($result) {
-                            echo
-                            '<div id="myModal" class="modal">' .
-                                '<div class="modal-content">'
-                                . '<span class="close">' . '&times;' . '</span>'
-                                . '<p>' . 'New Record Added' . '</p>'
-                                . '</div>' . '</div>';
-                        } else {
-                            echo
-                            '<div id="myModal" class="modal">' .
-                                '<div class="modal-content">'
-                                . '<span class="close">' . '&times;' . '</span>'
-                                . '<p>' . $nameErr . '</p>'
-                                . '<p>' . $titleErr . '</p>'
-                                . '<p>' . $sDateErr . '</p>'
-                                . '<p>' . $eDateErr . '</p>'
-                                . '<p>' . $insErr . '</p>'
-                                . '<p>' . $urlErr . '</p>'
-                                . '<p>' . $attErr . '</p>'
-                                . '</div>' . '</div>' . mysqli_error($connection);;
-                        }
+                    $result = mysqli_query($connection, $sql);
+                    if ($result) {
+                        echo
+                        '<div id="myModal" class="modal">' .
+                            '<div class="modal-content">'
+                            . '<span class="close">' . '&times;' . '</span>'
+                            . '<p>' . 'New Record Added' . '</p>'
+                            . '</div>' . '</div>';
                     } else {
                         echo
                         '<div id="myModal" class="modal">' .
@@ -131,9 +114,23 @@ include_once('../includes/DBconnection.php');
                             . '<p>' . $insErr . '</p>'
                             . '<p>' . $urlErr . '</p>'
                             . '<p>' . $attErr . '</p>'
-                            . '</div>' . '</div>';
+                            . '</div>' . '</div>' . mysqli_error($connection);;
                     }
-                
+                } else {
+                    echo
+                    '<div id="myModal" class="modal">' .
+                        '<div class="modal-content">'
+                        . '<span class="close">' . '&times;' . '</span>'
+                        . '<p>' . $nameErr . '</p>'
+                        . '<p>' . $titleErr . '</p>'
+                        . '<p>' . $sDateErr . '</p>'
+                        . '<p>' . $eDateErr . '</p>'
+                        . '<p>' . $insErr . '</p>'
+                        . '<p>' . $urlErr . '</p>'
+                        . '<p>' . $attErr . '</p>'
+                        . '</div>' . '</div>';
+                }
+
 
                 ?>
 
@@ -199,7 +196,23 @@ include_once('../includes/DBconnection.php');
             </div>
         </div>
     </main>
+    <script>
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
 
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
