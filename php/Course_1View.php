@@ -1,10 +1,11 @@
 <?php
 include_once '../includes/DBconnection.php';
 
-if(isset($_GET['id']))
-{
-    $id=$_GET['id'];
-    // $query=
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM `course` where id = $id";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc($result);
 }
 ?>
 
@@ -21,10 +22,6 @@ if(isset($_GET['id']))
 </head>
 
 <body>
-    <div id="left"></div>
-    <div id="right"></div>
-    <div id="top"></div>
-    <div id="bottom"></div>
     <header>
         <nav>
             <div class="container">
@@ -44,18 +41,20 @@ if(isset($_GET['id']))
         </nav>
     </header>
     <main>
+
+
         <section class="hero">
             <div class="hero_titel">
-                <h1>Course "Automata theory"</h1>
-                <p>from 1/9/2021 to 23/12/2021 ,totaly 48 training hours</p>
-                <p>Institution was " Al-Azhar University"</p>
+                <h1>Course " <?php echo $row['name']; ?> "</h1>
+                <p>from <?php echo $row['datefrom']; ?> to <?php echo $row['dateto']; ?>< ,totaly <?php echo $row['hours']; ?> training hours</p>
+                        <p>Institution was " <?php echo $row['ins']; ?> "</p>
             </div>
-
+            <?php $urls = 'http://localhost:8080/php-university-project/' . $row['image']; ?>
         </section>
         <section class="img_sec">
             <div class="contener">
                 <div class="img">
-                    <img src="../images/attachment.png" alt="">
+                    <img src="<?php echo 'http://localhost:8080/php-university-project/' . $row['image']; ?>" alt="">
                 </div>
             </div>
 
