@@ -67,6 +67,8 @@ include_once('../includes/DBconnection.php');
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $attach = $_POST['attach'];
                     $url = $_POST['url'];
+                    if(isset($_FILES['personal_image']))
+                    {
                     $image = $_FILES['personal_image'];
 
                     $file_name = $_FILES['personal_image']['name'];
@@ -77,7 +79,7 @@ include_once('../includes/DBconnection.php');
                     move_uploaded_file($image_tmp, $upload_path);
 
                     $image_path = str_replace('../', '', $upload_path);
-
+                    }
                     if (empty($_POST['course_name'])) {
                         $nameErr = "Course name is required";
                     } else {
@@ -98,14 +100,24 @@ include_once('../includes/DBconnection.php');
 
                     if (empty($_POST['sDate'])) {
                         $sDateErr = "Start date of the course is required";
+                        
+                       
+
+                       
+
                     } else {
                         $startdate = ($_POST['sDate']);
+                        
                     }
 
                     if (empty($_POST['eDate'])) {
                         $eDateErr = "End date of the course is required";
                     } else {
                         $enddate = ($_POST['eDate']);
+                        
+                        if ($startdate > $enddate) {
+                            $eDateErr= 'Course starts before it ends !!!';
+                        }
                     }
 
                     if (empty($_POST['ins'])) {

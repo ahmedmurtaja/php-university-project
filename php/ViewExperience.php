@@ -53,7 +53,7 @@ include_once('../includes/DBconnection.php');
                     echo "0 results";
                 }
                 ?>
-                <section class="first">
+                <!-- <section class="first">
                     <h3>IOS <sub>Google/trainning</sub></h3>
                     <h4>from 5/2016 to 5/2020</h4>
                     <p>At the beginning of 2020, I noticed an increase in the demand in the labor market for the field of mobile software development, so I decided to take a Java course and start developing mobile software, and I finished training on 4/2021 and started tranning in Google company for 3 months and afterthat I started freelancing alone because I had a good experience in this field.</p>
@@ -77,7 +77,7 @@ include_once('../includes/DBconnection.php');
                     <h3>Web programming <sub>Tesla/Job</sub></h3>
                     <h4>from 5/2023 to 5/2024</h4>
                     <p>The theories of probability are the mainstays of the most machine learning algorithm. Being familiar with probability enables you to deal with the uncertainty of data. Getting a grasp of the probability theories like Python, Gaussian Mixture Models, and Hidden Markov Models; is a must if you want to be considered for a machine learning job that centres around model building and evaluation.</p>
-                </section>
+                </section> -->
             </div>
 
         </div>

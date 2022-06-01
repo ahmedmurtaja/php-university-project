@@ -120,7 +120,8 @@ main .image img{
     margin-right: 70px;
 }
 table{
-    margin-left: -25px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 table tr th {
@@ -234,3 +235,11 @@ textarea{
 }
 /* ********** end main styles *********** */ 
 /*  end Add experience page  */
+
+.view a {
+    padding: 30px;
+    width: 100%;
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+}

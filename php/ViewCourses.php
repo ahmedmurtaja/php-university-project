@@ -81,10 +81,10 @@ include_once('../includes/DBconnection.php');
                     <td class="horo"><?php echo $row['dateto']; ?></td>
                     <td class="horo" colspan="2"><?php echo $row['ins']; ?></td>
                     <td class="horo" colspan="2"> <?php echo $row['url']; ?> </td>
-                    <td class="horo"><?php echo $row['note']; ?></td>
+                    <td class="horo" colspan="2"><?php echo $row['note']; ?></td>
                     <?php $urls = 'http://localhost:8080/php-university-project/' . $row['image']; ?>
-                    <td class="horo" colspan="2"><img src="<?php echo 'http://localhost:8080/php-university-project/' . $row['image']; ?>" alt="image" width="50" height="50"></td>
-                    <td class="horo" colspan="2"><a href="<?php echo 'Course_1View.php?id='.$row['id'];?>"> view </a> </td>
+                    <td class="horo" colspan="2"><img src="<?php echo 'http://localhost:8080/php-university-project/' . $row['image']; ?>" alt="image" width="100" height="100"></td>
+                    <td class="horo view" colspan="2"><a href="<?php echo 'Course_1View.php?id='.$row['id'];?>"> view </a> </td>
 
                 </tr>
             <?php
