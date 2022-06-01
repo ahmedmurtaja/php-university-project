@@ -47,7 +47,9 @@ if (isset($_GET['id'])) {
             <div class="hero_titel">
                 <h1>Course " <?php echo $row['name']; ?> "</h1>
                 <p>from <?php echo $row['datefrom']; ?> to <?php echo $row['dateto']; ?> ,totaly <?php echo $row['hours']; ?> training hours</p>
-                        <p>Institution was " <?php echo $row['ins']; ?> "</p>
+                <p>Institution was " <?php echo $row['ins']; ?> "</p>
+                <p> url was " <a href="<?php echo $row['url'];?>"> URL</a> "</p>
+
             </div>
             <?php $urls = 'http://localhost:8080/php-university-project/' . $row['image']; ?>
         </section>
